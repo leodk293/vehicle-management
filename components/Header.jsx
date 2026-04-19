@@ -13,9 +13,9 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   async function fetchSession() {
     const session = await getSession();
-    console.log("User session:", session);
+    //console.log("User session:", session);
     setSession(session);
-     if (!session) {
+    if (!session) {
       router.push("/login");
     }
   }

@@ -11,7 +11,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-full flex flex-col">
       <Header />
-      <main className=" min-h-screen flex-grow">{children}</main>
+      <main className=" mt-20 min-h-screen flex-grow">{children}</main>
       <Footer />
     </div>
   );
