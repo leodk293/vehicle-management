@@ -124,8 +124,9 @@ export default function VehiclePage({ params }) {
       const { error } = await supabase.from("locations").insert({
         client_id: session?.user.id,
         vehicule_id: vehicle_id,
-        client_avatar: session?.user.avatar_url,
-        nom_client: session?.user?.name,
+        client_avatar: session?.user.user_metadata.avatar_url,
+        nom_client: session?.user.user_metadata.name,
+        vehicle_image: vehicle.data.image_url,
         date_debut: startDate.toISOString(),
         date_fin: endDate.toISOString(),
         montant_total: montantTotal,

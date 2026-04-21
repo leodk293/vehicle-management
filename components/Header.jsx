@@ -58,17 +58,24 @@ export default function Header() {
       <div className="flex items-center gap-3">
         {session?.user ? (
           <div className="hidden sm:flex items-center gap-1">
-            <div className="flex items-center gap-2 p-1 rounded-full">
+            <div className="flex items-center border border-white/[0.12] gap-2 p-1 rounded-full">
               {session.user.user_metadata.avatar_url && (
                 <Image
                   src={session.user.user_metadata.avatar_url}
-                  alt="User Avatar"
+                  alt={
+                    session.user.user_metadata.name
+                      ? session.user.user_metadata.name
+                      : "User avatar"
+                  }
+                  title={session.user.user_metadata.name}
                   width={32}
                   height={32}
                   className="rounded-full border border-white/[0.12] bg-white/[0.06]"
                 />
               )}
-              <p className="text-[13px] text-white/45">{session.user.name}</p>
+              <p className="text-[13px] text-white/45">
+                {session.user.user_metadata.name.split(" ")[0]}
+              </p>
             </div>
             <button
               onClick={() => signOut()}
@@ -142,7 +149,10 @@ export default function Header() {
                   {session.user.user_metadata.avatar_url && (
                     <Image
                       src={session.user.user_metadata.avatar_url}
-                      alt="User Avatar"
+                      alt={
+                        session.user.name ? session.user.name : "User avatar"
+                      }
+                      title={session.user.name}
                       width={36}
                       height={36}
                       className="rounded-full border border-white/[0.12] bg-white/[0.06]"
