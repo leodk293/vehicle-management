@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { getSession, signOut } from "@/utils/auth";
 import Image from "next/image";
 import Logo from "./Logo";
@@ -11,6 +11,7 @@ export default function Header() {
   const router = useRouter();
   const [session, setSession] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
   async function fetchSession() {
     const session = await getSession();
     //console.log("User session:", session);
@@ -34,17 +35,18 @@ export default function Header() {
       {/* Desktop Nav */}
       <nav className="hidden md:flex items-center gap-1">
         {[
-          { label: "Dashboard", href: "/home", active: true },
+          { label: "Dashboard", href: "/home" },
           { label: "Profile", href: "/home/profile" },
           { label: "Contact", href: "/home/contact" },
-          { label: "X/Twitter", href: "/home/contact" },
-        ].map(({ label, href, active }) => (
+          { label: "X/Twitter", href: "https://x.com/Aboubac48530295" },
+        ].map(({ label, href }) => (
           <Link
             key={label}
             href={href}
+            target={label === "X/Twitter" ? "_blank" : ""}
             className={`text-[13px] px-3.5 py-1.5 rounded-lg transition-all duration-150 no-underline
               ${
-                active
+                pathname === `${href}`
                   ? "text-[#f5f0e8] bg-white/[0.07]"
                   : "text-white/45 hover:text-white/85 hover:bg-white/[0.05]"
               }`}
@@ -125,11 +127,12 @@ export default function Header() {
               { label: "Dashboard", href: "/home", active: true },
               { label: "Profile", href: "/home/profile" },
               { label: "Contact", href: "/home/contact" },
-              { label: "X/Twitter", href: "/home/contact" },
+              { label: "X/Twitter", href: "https://x.com/Aboubac48530295" },
             ].map(({ label, href, active }) => (
               <Link
                 key={label}
                 href={href}
+                target={label === "X/Twitter" ? "_blank" : ""}
                 onClick={() => setMobileOpen(false)}
                 className={`block text-[15px] px-3 py-2 rounded-md transition-all duration-150 no-underline
                   ${

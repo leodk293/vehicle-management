@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import AiAssistantPopover from "@/components/AiAssistantPopover";
 
 export const metadata: Metadata = {
   title: {
@@ -14,8 +15,11 @@ export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-full flex flex-col">
       <Header />
-      <main className=" mt-20 min-h-screen flex-grow">{children}</main>
+      <main className=" mt-20 font-sans min-h-screen flex-grow">
+        {children}
+      </main>
       <Footer />
+      <AiAssistantPopover />
     </div>
   );
 }
