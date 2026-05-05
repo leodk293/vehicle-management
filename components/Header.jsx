@@ -28,14 +28,17 @@ export default function Header() {
   }, [session]);
 
   return (
-    <header className="bg-[#0d0d14] border-b border-white/[0.07] h-16 px-4 md:px-8 flex items-center justify-between relative">
+    <header
+      style={{ fontFamily: "Poppins, sans-serif" }}
+      className="bg-[#0d0d14] border-b border-white/[0.07] h-16 px-4 md:px-8 flex items-center justify-between relative"
+    >
       {/* Brand */}
       <Logo />
 
       {/* Desktop Nav */}
       <nav className="hidden md:flex items-center gap-1">
         {[
-          { label: "Dashboard", href: "/home" },
+          { label: "Home", href: "/home" },
           { label: "Profile", href: "/home/profile" },
           { label: "Contact", href: "/home/contact" },
           { label: "X/Twitter", href: "https://x.com/Aboubac48530295" },
