@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { signInWithGoogle, getSession } from "@/utils/auth";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import googleLogo from "../../public/google-logo.png";
 
