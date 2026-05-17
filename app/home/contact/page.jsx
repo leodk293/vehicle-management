@@ -8,7 +8,6 @@ export default function ContactPage() {
     event.preventDefault();
     setResult("Sending....");
     const formData = new FormData(event.target);
-
     formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS);
 
     const response = await fetch("https://api.web3forms.com/submit", {
@@ -28,126 +27,162 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 bg-zinc-900 rounded-2xl shadow-xl p-8 border border-zinc-800 flex flex-col md:flex-row gap-10">
-      {/* Left side: Form */}
-      <div className="flex-1 min-w-0">
-        <h2 className="text-3xl font-bold mb-2 text-indigo-400">Contact Us</h2>
-        <p className="mb-6 text-zinc-300 text-sm">
-          We&apos;d love to hear from you! Please fill out the form below.
-        </p>
-        <form className="flex flex-col gap-4" onSubmit={onSubmit}>
-          <div>
-            <label
-              htmlFor="name"
-              className="block mb-1 text-sm font-semibold text-zinc-200"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              required
-              className="w-full px-4 py-2 rounded-lg bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-              placeholder="Your name"
-            />
+    <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-[1fr_1.4fr] rounded-2xl overflow-hidden border border-white/10">
+
+        {/* Sidebar */}
+        <div className="relative bg-neutral-900 px-8 py-10 flex flex-col gap-8 overflow-hidden">
+          {/* Decorative circles */}
+          <div className="absolute -top-14 -right-14 w-44 h-44 rounded-full bg-amber-500/10 pointer-events-none" />
+          <div className="absolute -bottom-10 -left-10 w-28 h-28 rounded-full bg-amber-500/5 pointer-events-none" />
+
+          {/* Heading */}
+          <div className="relative z-10">
+            <p className="text-xs uppercase tracking-widest text-amber-500 font-medium mb-2">
+              Get in touch
+            </p>
+            <h2 className="text-2xl font-serif text-white leading-snug font-normal">
+              Let&apos;s talk about your project
+            </h2>
           </div>
-          <div>
-            <label
-              htmlFor="email"
-              className="block mb-1 text-sm font-semibold text-zinc-200"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              className="w-full px-4 py-2 rounded-lg bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-              placeholder="you@email.com"
-            />
+
+          <p className="relative z-10 text-sm text-white/40 leading-relaxed -mt-4">
+            Have a question or want to work together? Fill out the form and
+            we&apos;ll get back to you within 24 hours.
+          </p>
+
+          {/* Contact info */}
+          <div className="relative z-10 flex flex-col gap-5 mt-auto">
+            {[
+              {
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
+                ),
+                label: "Phone",
+                value: "+1 (555) 234-5678",
+              },
+              {
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                ),
+                label: "Email",
+                value: "hello@yourcompany.com",
+              },
+              {
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                ),
+                label: "Location",
+                value: "Marrakech, Morocco",
+              },
+            ].map(({ icon, label, value }) => (
+              <div key={label} className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-lg bg-amber-500/15 flex items-center justify-center text-amber-500 shrink-0">
+                  {icon}
+                </div>
+                <div>
+                  <p className="text-[11px] uppercase tracking-wider text-white/30 mb-0.5">
+                    {label}
+                  </p>
+                  <p className="text-sm text-white/80">{value}</p>
+                </div>
+              </div>
+            ))}
           </div>
-          <div>
-            <label
-              htmlFor="message"
-              className="block mb-1 text-sm font-semibold text-zinc-200"
-            >
-              Message
-            </label>
-            <textarea
-              name="message"
-              id="message"
-              required
-              rows={5}
-              className="w-full px-4 py-2 rounded-lg bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-              placeholder="Type your message here..."
-            />
-          </div>
-          <button
-            type="submit"
-            className="font-semibold bg-gradient-to-r cursor-pointer from-indigo-600 to-blue-500 hover:from-indigo-700 hover:to-blue-600 text-white rounded-lg px-6 py-2 mt-2 transition-shadow shadow-lg hover:shadow-xl focus:outline-none"
-          >
-            Submit Form
-          </button>
-        </form>
-        <span
-          className={`block mt-6 text-center text-base font-medium ${
-            result.includes("Success")
-              ? "text-green-400"
-              : result
-                ? "text-red-400"
-                : "text-white"
-          }`}
-        >
-          {result}
-        </span>
-      </div>
-      {/* Right side: Contact Info */}
-      <div className="flex-1 min-w-0 mt-10 md:mt-0 flex flex-col justify-center">
-        <div className="bg-zinc-800 rounded-xl p-6 gap-4 flex flex-col shadow-lg border border-zinc-700">
-          <h3 className="text-xl font-semibold mb-3 text-indigo-300">
-            Our Contact Info
-          </h3>
-          <div className="flex items-center gap-3 text-zinc-200">
-            <svg
-              width="20"
-              height="20"
-              fill="currentColor"
-              className="text-indigo-400"
-            >
-              <path d="M2.003 5.884L10 10.882l7.997-4.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z" />
-              <path d="M18 8.118l-8 5-8-5V16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z" />
-            </svg>
-            <span className="select-all">hello@locomote-vehicles.com</span>
-          </div>
-          <div className="flex items-center gap-3 text-zinc-200 mt-1">
-            <svg
-              width="20"
-              height="20"
-              fill="currentColor"
-              className="text-indigo-400"
-            >
-              <path d="M17.707 13.293a1 1 0 0 0-1.414 0l-2.829 2.829c-2.63-1.427-4.86-3.657-6.288-6.288l2.83-2.83a1 1 0 0 0 0-1.414L6.586 3.293a1 1 0 0 0-1.414 0l-1.878 1.878c-.526.526-.816 1.25-.816 2.003 0 7.18 5.82 13 13 13 .753 0 1.477-.29 2.003-.817l1.878-1.877a1 1 0 0 0 0-1.415l-2.252-2.252z" />
-            </svg>
-            <span className="select-all">+1 (800) 555-LOCO</span>
-          </div>
-          <div className="flex items-center gap-3 text-zinc-200 mt-1">
-            <svg
-              width="20"
-              height="20"
-              fill="currentColor"
-              className="text-indigo-400"
-            >
-              <path d="M10 2C5.031 2 1 6.031 1 11c0 2.959 2.302 5.363 5.105 5.927V17l1.636-1.406a8.954 8.954 0 0 0 2.259.279 8.92 8.92 0 0 0 2.26-.279L13.895 17v-1.073C16.698 16.362 19 13.959 19 11c0-4.969-4.031-9-9-9z" />
-            </svg>
-            <span>1234 Main St, Suite 100, Metropolis, USA</span>
-          </div>
-          <div className="mt-6">
-            <span className="font-medium text-zinc-400 text-sm">
-              Office Hours: Mon-Fri 9:00am - 5:00pm
-            </span>
-          </div>
+        </div>
+
+        {/* Form side */}
+        <div className="bg-neutral-950 px-8 py-10 flex flex-col gap-5">
+          <form onSubmit={onSubmit} className="flex flex-col gap-5">
+            {/* Name + Email row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-white/40 uppercase tracking-wide">
+                  Full name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Jane Doe"
+                  required
+                  className="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/10 transition"
+                />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium text-white/40 uppercase tracking-wide">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="jane@example.com"
+                  required
+                  className="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/10 transition"
+                />
+              </div>
+            </div>
+
+            {/* Subject */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-medium text-white/40 uppercase tracking-wide">
+                Subject
+              </label>
+              <input
+                type="text"
+                name="subject"
+                placeholder="What's this about?"
+                className="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/10 transition"
+              />
+            </div>
+
+            {/* Message */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-medium text-white/40 uppercase tracking-wide">
+                Message
+              </label>
+              <textarea
+                name="message"
+                placeholder="Tell us more about your project..."
+                rows={5}
+                required
+                className="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/10 transition resize-none"
+              />
+            </div>
+
+            {/* Submit */}
+            <div className="flex items-center gap-4">
+              <button
+                type="submit"
+                className="flex items-center gap-2 bg-amber-500 hover:bg-amber-400 active:scale-95 text-neutral-950 text-sm font-semibold px-5 py-2.5 rounded-lg transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                </svg>
+                Send message
+              </button>
+
+              {result && (
+                <span
+                  className={`text-sm ${
+                    result.toLowerCase().includes("success")
+                      ? "text-emerald-400"
+                      : result === "Sending...."
+                      ? "text-white/40"
+                      : "text-red-400"
+                  }`}
+                >
+                  {result}
+                </span>
+              )}
+            </div>
+          </form>
         </div>
       </div>
     </div>
